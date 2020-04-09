@@ -1,17 +1,22 @@
 package nl.lugus.development.backend;
 
 import io.dropwizard.Application;
+import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.migrations.MigrationsBundle;
-import nl.lugus.development.backend.persistance.ProfileDAO;
+import nl.lugus.development.backend.persistence.DAOFactory;
+import nl.lugus.development.backend.persistence.ProfileDAO;
+import nl.lugus.development.backend.persistence.mappers.UserMapper;
 import nl.lugus.development.backend.resources.ProfileResource;
 import nl.lugus.development.backend.services.ProfileService;
 import nl.lugus.development.backend.util.DatabaseConnector;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.skife.jdbi.v2.DBI;
 import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 import javax.servlet.DispatcherType;
@@ -50,7 +55,7 @@ public class LINCApplication extends Application<LINCConfiguration> {
 
     @Override
     public void run(final LINCConfiguration configuration,
-                    final Environment environment) {
+                    final Environment environment) throws ClassNotFoundException {
         DataSourceFactory factory = configuration.getDataSourceFactory();
         DataSource dataSource = factory.build(environment.metrics(), "webshop");
 
@@ -60,26 +65,31 @@ public class LINCApplication extends Application<LINCConfiguration> {
         cors.setInitParameter("allowedOrigins", "*");
         cors.setInitParameter("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin,token");
         cors.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
-        environment.jersey().packages("app.resource");
+
 
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
-        registerInjections(environment);
-
-        new DatabaseConnector();
         DatabaseConnector.getInstance().setDataSource(dataSource);
+        registerInjections(environment, configuration);
+        environment.jersey().packages("nl.lugus.development.backend.resources");
 
     }
 
-    private void registerInjections(Environment environment) {
+    private void registerInjections(Environment environment, LINCConfiguration configuration) throws ClassNotFoundException {
 
+        final DAOFactory jdbi = new DAOFactory(environment, configuration.getDataSourceFactory());
+
+
+        environment.jersey().register(new AbstractBinder() {
+            @Override
+            protected void configure() {
+                bind(jdbi).to(DAOFactory.class);
+                bind(ProfileService.class).to(ProfileService.class);
+            }
+        });
         environment.jersey().register(new JsonProcessingExceptionMapper(true));
 
-        environment.jersey().register(new ProfileResource(
-                new ProfileService(
-                        new ProfileDAO()
-                )
-        ));
+//        environment.jersey().register(ProfileResource.class);
 
     }
 
