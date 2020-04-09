@@ -57,6 +57,14 @@
             <version>42.2.7</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901-1.jdbc4</version>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-migrations -->
         <dependency>
             <groupId>io.dropwizard</groupId>
@@ -102,18 +110,23 @@
             <version>${jackson.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.jdbi/jdbi -->
-        <dependency>
-            <groupId>org.jdbi</groupId>
-            <artifactId>jdbi</artifactId>
-            <version>2.78</version>
-        </dependency>
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.jdbi/jdbi &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.jdbi</groupId>-->
+<!--            <artifactId>jdbi</artifactId>-->
+<!--            <version>2.78</version>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-jdbi -->
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-jdbi</artifactId>
             <version>0.7.0-rc1</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.11</version>
         </dependency>
 
     </dependencies>

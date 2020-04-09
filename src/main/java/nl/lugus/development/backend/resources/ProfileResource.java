@@ -5,15 +5,12 @@ import nl.lugus.development.backend.services.ProfileService;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
+import javax.ws.rs.core.Response;
 
 @Path("profile")
-//@Produces(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @RolesAllowed({"Admin"})
 public class ProfileResource {
 
@@ -26,8 +23,14 @@ public class ProfileResource {
 
     @GET
     @Path("/user/{id}")
-    public User getUserInfo(@PathParam("id") int id) {
-        return service.getUserById(id);
+    public Response getUserInfo(@PathParam("id") int id) {
+        return Response.ok(service.getUserById(id)).build();
+    }
 
+    @PUT
+    @Path("/user/{id}")
+    public Response updateUserInfo(User user, @PathParam("id") int id) {
+        service.updateUserById(id, user);
+        return Response.ok().build();
     }
 }

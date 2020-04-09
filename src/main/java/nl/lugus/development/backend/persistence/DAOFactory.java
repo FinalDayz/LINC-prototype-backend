@@ -12,7 +12,7 @@ public class DAOFactory {
 
     @Inject
     public DAOFactory(Environment env, DataSourceFactory dataSourceFactory) throws ClassNotFoundException {
-        this.factory = (new DBIFactory()).build(env, dataSourceFactory, "mysql");
+        this.factory = (new DBIFactory()).build(env, dataSourceFactory, "postgresql");
     }
 
     public <T> T onDemand(Class<T> dao) {

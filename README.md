@@ -1,6 +1,6 @@
 # LINC-ptorotype-backend
 
-How to start the LINC-ptorotype-backend application
+How to start the LINC-prototype-backend application
 ---
 
 1. Run `mvn clean install` to build your application

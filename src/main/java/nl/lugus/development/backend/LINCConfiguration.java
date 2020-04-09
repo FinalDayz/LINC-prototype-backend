@@ -12,14 +12,13 @@ public class LINCConfiguration extends Configuration {
 
     @Valid
     @NotNull
+    @JsonProperty
     private DataSourceFactory database = new DataSourceFactory();
 
-    @JsonProperty("database")
     public void setDataSourceFactory(DataSourceFactory factory) {
         this.database = factory;
     }
 
-    @JsonProperty("database")
     public DataSourceFactory getDataSourceFactory() {
         return database;
     }

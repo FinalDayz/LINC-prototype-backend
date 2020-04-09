@@ -1,7 +1,6 @@
 package nl.lugus.development.backend;
 
 import io.dropwizard.Application;
-import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -9,14 +8,11 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import nl.lugus.development.backend.persistence.DAOFactory;
-import nl.lugus.development.backend.persistence.ProfileDAO;
-import nl.lugus.development.backend.persistence.mappers.UserMapper;
 import nl.lugus.development.backend.resources.ProfileResource;
 import nl.lugus.development.backend.services.ProfileService;
 import nl.lugus.development.backend.util.DatabaseConnector;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import org.skife.jdbi.v2.DBI;
 import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 import javax.servlet.DispatcherType;
@@ -41,9 +37,9 @@ public class LINCApplication extends Application<LINCConfiguration> {
                 getClass().getPackage()
         );
         bootstrap.addBundle(new MultiPartBundle());
-        bootstrap.addBundle(GuiceBundle.builder()
-                .enableAutoConfig(getClass().getPackage().getName())
-                .build());
+//        bootstrap.addBundle(GuiceBundle.builder()
+//                .enableAutoConfig(getClass().getPackage().getName())
+//                .build());
 
         bootstrap.addBundle(new MigrationsBundle<LINCConfiguration>() {
             @Override
@@ -89,7 +85,7 @@ public class LINCApplication extends Application<LINCConfiguration> {
         });
         environment.jersey().register(new JsonProcessingExceptionMapper(true));
 
-//        environment.jersey().register(ProfileResource.class);
+        environment.jersey().register(ProfileResource.class);
 
     }
 

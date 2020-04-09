@@ -100,6 +100,7 @@
     <orderEntry type="library" name="Maven: com.google.inject.extensions:guice-servlet:4.2.2" level="project" />
     <orderEntry type="library" name="Maven: ru.vyarus:generics-resolver:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.postgresql:postgresql:42.2.7" level="project" />
+    <orderEntry type="library" name="Maven: postgresql:postgresql:9.1-901-1.jdbc4" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-migrations:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-db:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-jdbc:8.5.24" level="project" />
@@ -118,9 +119,12 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.10.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.10.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.10.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jdbi:jdbi:2.78" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-jdbi:0.7.0-rc1" level="project" />
+    <orderEntry type="library" name="Maven: org.jdbi:jdbi:2.53" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.findbugs:annotations:2.0.2" level="project" />
     <orderEntry type="library" name="Maven: com.codahale.metrics:metrics-jdbi:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.codahale.metrics:metrics-core:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.11" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: com.google.protobuf:protobuf-java:2.6.0" level="project" />
   </component>
 </module>
